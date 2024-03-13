@@ -9,6 +9,7 @@ function App() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [logout, setLogout] = useState(false);
 
   const refreshToken = async () => {
     try {
@@ -66,6 +67,21 @@ function App() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        "/logout",
+        {
+          token: user.refreshToken,
+        },
+        { headers: { authorization: "Bearer " + user.accessToken } }
+      );
+      setLogout(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="container">
       {user ? (
@@ -81,6 +97,11 @@ function App() {
           <button className="deleteButton" onClick={() => handleDelete(2)}>
             Delete Jane
           </button>
+          {user && (
+            <button className="logout" onClick={handleLogout}>
+              Logout
+            </button>
+          )}
           {error && (
             <span className="error">
               You are not allowed to delete this user!
@@ -90,6 +111,9 @@ function App() {
             <span className="success">
               User has been deleted successfully...
             </span>
+          )}
+          {logout && (
+            <span className="success">You logged out successfully!!!</span>
           )}
         </div>
       ) : (

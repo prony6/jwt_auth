@@ -60,13 +60,21 @@ input:focus {
   text-align: center;
 }
 
-.deleteButton {
+.deleteButton, .logout {
   padding: 10px;
   border: none;
   border-radius: 10px;
   background-color: #fff0f1;
   color: #d95087;
   cursor: pointer;
+}
+
+.logout{
+  width: 85px;
+}
+
+.logout:hover{
+  background-color: #fad4d7;
 }
 
 .deleteButton:hover {

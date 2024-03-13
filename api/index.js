@@ -86,7 +86,9 @@ app.post("/api/login", (req, res) => {
 
 // verify token
 const verify = (req, res, next) => {
+  console.log("Headers received:", req.headers);
   const authHeader = req.headers.authorization;
+  console.log("Authorization headers:", authHeader);
   if (authHeader) {
     const token = authHeader.split(" ")[1];
 
